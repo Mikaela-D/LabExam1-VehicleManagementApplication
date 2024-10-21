@@ -19,6 +19,10 @@ public class VehicleService {
         return vehicleRepository.findAll();
     }
 
+    public List<Vehicle> getAllVehicleById(Long id) {
+        return vehicleRepository.findById(id);
+    }
+
     public List<Vehicle> addVehicle(Vehicle vehicle) {
         vehicleRepository.save(vehicle);
         return vehicleRepository.findAll();

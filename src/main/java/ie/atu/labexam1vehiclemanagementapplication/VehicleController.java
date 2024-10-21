@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/vehicle")
@@ -19,6 +20,16 @@ public class VehicleController {
     @GetMapping("/getVehicles")
     public List<Vehicle> getVehicles() {
         return vehicleService.getVehicles();
+    }
+
+    @GetMapping("/getVehicleById/{id}")
+    public ResponseEntity <Vehicle> getVehicleById(@PathVariable String id) {
+        Optional<Vehicle> vehicle = vehicleService.getAllVehicleById(id);
+        if(vehicle.isPresent()) {
+            return ResponseEntity.ok(vehicle.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping("/addVehicle")
