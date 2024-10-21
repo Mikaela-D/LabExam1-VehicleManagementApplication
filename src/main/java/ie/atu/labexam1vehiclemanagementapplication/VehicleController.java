@@ -2,7 +2,6 @@ package ie.atu.labexam1vehiclemanagementapplication;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +23,7 @@ public class VehicleController {
 
     @PostMapping("/addVehicle")
     public ResponseEntity<List<Vehicle>> addVehicle(@RequestBody Vehicle vehicle) {
-        List<Vehicle> updatedVehicleList = vehicleService.add(vehicle);
+        List<Vehicle> updatedVehicleList = vehicleService.addVehicle(vehicle);
         return ResponseEntity.ok(updatedVehicleList);
     }
 
@@ -32,7 +31,7 @@ public class VehicleController {
     public ResponseEntity<Vehicle> updateVehicle(@PathVariable Long id, @RequestBody Vehicle updatedVehicle) {
         Vehicle updated = vehicleService.updateVehicle(id, updatedVehicle);
         if (updated != null) {
-            return new ResponseEntity.ok(updated);
+            return ResponseEntity.ok(updated);
         } else {
             return ResponseEntity.notFound().build();
         }
